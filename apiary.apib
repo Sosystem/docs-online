@@ -1,0 +1,48 @@
+FORMAT: 1A
+HOST: http://documentosonline.cl/
+
+# Docs Online
+
+Esta es una API sencilla, para pedir la entrega de un documento PDF a partir de DTE, en formato XML.
+
+## Envio de XML [/dte/hgen/token]
+
+###  [POST]
+
++ Request (u'multipart/form-data; boundary=33b4531a79be4b278de5f5688fab7701')
+
+
+        {
+            "file_upload": "Archivo xml"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "token": "token para rescatar el documento",
+        }
+        
+
+## Obtener el PDF a partir del token [/dte/jget]
+
+### [POST]
+
+
++ Request (application/json)
+
+        {
+            "params": {
+                "token": "token obtenido desde /dte/hgen/token"
+            }
+        }
+
++ Response 200 (application/json)
+
+    
+    + Body
+
+            {
+                "result": {
+                    "pdf": "archivo pdf codificado en base64"
+                }
+            }
