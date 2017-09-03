@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://documentosonline.cl/
+HOST: https://www.documentosonline.cl/
 
 # Docs Online
 
@@ -41,5 +41,46 @@ Esta es una API sencilla, para pedir la entrega de un documento PDF a partir de 
             {
                 "result": {
                     "pdf": "archivo pdf codificado en base64"
+                }
+            }
+            
+
+## Obtener email de intercambio y giros con el rut [/partner/jget]
+
+### Envio del RUT [POST]
+
++ Request
+    + Headers
+    
+            Content-Type: application/json
+            Charset: utf-8
+            Authorization: Basic consiga_su_token_registrando_en_www_documentosonline_cl
+
+    + Body
+    
+            {
+                "params": {
+                    "vat": "99999999-9"
+                }
+            }
+        
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                'jsonrpc': u'2.0',
+                'id': None, 
+                'result': {
+                    'partner_activities_ids': {
+                        'code': '999999',
+                        'name': 'Nombre de actividad'
+                    }, 
+                    'name': 'Nombre Razon Social',
+                    'dte_resolution_date': 'AAAA-MM-DD',
+                    'dte_email': 'mail@example.com',
+                    'email': 'mail@example.com',
+                    'vat': 'CL99999999X',
+                    'dte_resolution_number': '999'
                 }
             }
