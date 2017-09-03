@@ -1,11 +1,31 @@
 FORMAT: 1A
 HOST: https://www.documentosonline.cl/
 
-# Docs Online
+# Documentos Online
 
-Esta es una API sencilla, para pedir la entrega de un documento PDF a partir de DTE, en formato XML.
+[https://www.documentosonline.cl](https://www.documentosonline.cl)
+
+Esta es una API sencilla, desarrollada inicialmente para la renderización en línea de documentos PDF, a partir del envío a la plataforma, de un documento tributario electrónico (DTE), en en formato XML.
+Adicionalmente, se van incorporando nuevos webservices y características para dar soporte a cualquier implementación de sistemas ERP.
 
 ## Enviar el XML [/dte/hgen/token]
+
+- ___Objetivo:___
+El usuario puede enviar un archivo XML. **[Documentos Online](https://www.documentosonline.cl)** devolverá un TOKEN, el cual podrá ser utilizado, tanto para formar el link de entrega del documento, como para por medio de otro webservice, obtener el PDF renderizado y codificado en base64.
+Este mismo servicio puede ser usado en forma interactiva desde el siguiente link:
+**[https://www.documentosonline.cl/dte/addxml](https://www.documentosonline.cl/dte/addxml)**.
+
+- ___Autenticación:___
+En etapa BETA en la cual se encuentra el servicio, este webservice es abierto, y no requiere autenticación.
+
+- ___Persistencia del Link:___
+    - _Etapa Beta y Servicio Gratuito:_ El link tendrá una persistencia de 30 días.
+    - _Servicio Premium:_ El link persistirá durante la duración de la suscripción del usuario (al entrar en vigencia el servicio premium, servirá de backup de los documentos).
+    
+- ___Sintaxis y Pruebas___:
+Haga clic en el siguiente enlace para ver los ejemplos, tanto en servidor mockup como en servidor de producción.
+
+
 
 ### Envio de XML [POST]
 
@@ -23,6 +43,25 @@ Esta es una API sencilla, para pedir la entrega de un documento PDF a partir de 
         
 
 ## Obtener el PDF a partir del token [/dte/jget]
+
+- ___Objetivo:___
+Una vez que ha obtenido el token, puede utilizar el mismo en forma interactiva, o utilizando el presente webservice, obtener como respuesta el PDF codificado.
+
+- ___Importante___
+Durante la etapa BETA, el servicio es totalmente abierto y permite el uso sin límite. A partir de que el período beta sea discontinuado por **[Documentos Online](https://www.documentosonline.cl)**, el servicio gratuito tendrá un límite de consultas mensual, y el usuario dispondrá de un esquema de uso pagado para tener mayor recurrencia de uso de este webservice.
+
+- ___Ejemplo de uso interactivo___:
+El formulario interactivo que puede encontrar en el siguiente enlace:
+**[https://www.documentosonline.cl/dte/addxml](https://www.documentosonline.cl/dte/addxml)**, una vez enviado el XML mediante el boton "ENVIAR", realizará una redirección a una url equivalente al webservice, pero interactiva.
+[https://www.documentosonline.cl/dte/hgen/html/TOKEN](https://www.documentosonline.cl/dte/hgen/html/TOKEN).
+
+- ___Persistencia del Token___:
+La persistencia del token corresponderá con lo especificado arriba.
+
+- ___Sintaxis y Pruebas:___
+Haga clic en el siguiente enlace para ver los ejemplos y realizar test, tanto en servidor mockup como en servidor de producción.
+
+
 
 ### Envio del Token [POST]
 
@@ -46,6 +85,27 @@ Esta es una API sencilla, para pedir la entrega de un documento PDF a partir de 
             
 
 ## Obtener email de intercambio y giros con el rut [/partner/jget]
+
+- ___Objetivo___:
+Este servicio pretende simplificar el mantenimiento de sistemas ERP, en función de que no existe un Webservice disponible en el SII de Chile, para obtener dos datos fundamentales de facturación. Estos son:
+    - _Email de Intercambio_: Es la dirección de correo configurada legalmente para la recepción y envío de DTEs. Sin la misma no se pueden enviar DTE a un cliente.
+    - _Actividad Económica_: Este es un dato que también se requiere, para simplificar el ingreso de nuevos clientes/proveedores a la base de datos de cualquier ERP.
+    - _Plus_: Se proporcionan otros datos de los contribuyentes, los cuales son de dominio público.
+
+- ___Ejemplo de Uso Interactivo___: No disponible.
+
+- ___Autenticación___: Este servicio no es provisto sin autenticación. La recurrencia del uso se limitará a la suscripción del usuario.
+
+- ___Sintaxis y Pruebas___:
+Haga clic en el siguiente enlace para ver los ejemplos y realizar test, tanto en servidor mockupMi como en servidor de producción. Antes de su utilización deberá obtener un token desde la siguiente dirección:
+[https://www.documentosonline.cl](https://www.documentosonline.cl):
+    - Haciendo click en la opción **Registrarse**.
+    - Ingrese su nombre
+    - Ingrese su email.
+    - Seleccione una contraseña.
+    - Luego vaya a la opción **"Mi Cuenta"**, que se encuentra debajo de su usuario (ver captura):
+    
+
 
 ### Envio del RUT [POST]
 
